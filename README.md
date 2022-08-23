@@ -9,9 +9,11 @@ A responsive html/css page that displays a single user profile and multiple loca
 ## Screenshots
 
 Desktop Resolution Screenshot
+
 ![screenshot of desktop resolution](./images/demo/browser_screenshot.png)
 
 Mobile Resolution Screenshot
+
 ![screenshot of mobile resolution](./images/demo/mobile_screenshot.png)
 
 
