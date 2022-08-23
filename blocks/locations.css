@@ -1,0 +1,24 @@
+.locations {
+    margin: 0;
+    padding: 0 200px;
+}
+.locations__cards {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    column-gap: 17px;
+    row-gap: 20px;
+}
+@media (min-width: 471px) and (max-width: 1120px) {
+    .locations {
+        padding: 0 95px;
+    }
+}
+@media (min-width: 320px) and (max-width: 470px) {
+    .locations {
+        padding: 0 19px;
+    }
+}

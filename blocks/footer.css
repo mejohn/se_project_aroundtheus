@@ -1,0 +1,18 @@
+.footer {
+    display: flex;
+    align-items: flex-end;
+    padding: 67px 200px 60px;
+}
+.footer__copyright {
+    color: #545454;
+}
+@media (min-width: 471px) and (max-width: 1120px) {
+    .footer {
+        padding: 54px 95px 42px;
+    }
+}
+@media (min-width: 320px) and (max-width: 470px) {
+    .footer {
+        padding: 48px 19px 36px;
+    }
+}
