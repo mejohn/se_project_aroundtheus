@@ -1,5 +1,21 @@
 # Project 3: Around The U.S.
 
+A responsive html/css page that displays a single user profile and multiple locations that user has added. Includes buttons for changing user's name, adding a new location, or liking/saving a location but no actions on button click.
+
+## GitHub Pages Link
+
+[View Project](https://mejohn.github.io/se_project_aroundtheus/)
+
+## Screenshots
+
+Desktop Resolution Screenshot
+![screenshot of desktop resolution](./images/demo/browser_screenshot.png)
+
+Mobile Resolution Screenshot
+![screenshot of mobile resolution](./images/demo/mobile_screenshot.png)
+
+
+
 ### Overview  
 
 * Intro  
