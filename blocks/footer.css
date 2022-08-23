@@ -2,9 +2,11 @@
     display: flex;
     align-items: flex-end;
     padding: 67px 200px 60px;
+    margin: 0;
 }
 .footer__copyright {
     color: #545454;
+    margin: 0;
 }
 @media (min-width: 471px) and (max-width: 1120px) {
     .footer {

@@ -1,13 +1,12 @@
 .header {
     box-sizing: border-box;
-    position: relative;
     padding: 45px 200px 0;
+    border-bottom: 1px solid rgba(84,84,84,0.7);
+    -webkit-background-clip: padding-box; /* for Safari */
+    background-clip: padding-box; /* Firefox 4+, Opera, Chrome */
 }
-.header__line {
-    margin: 0;
-    height: 0;
-    opacity: 0.7;
-    border: 1px solid #545454;
+.header__link {
+    text-decoration: none;
 }
 @media (min-width: 471px) and (max-width: 1120px) {
     .header {

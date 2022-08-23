@@ -45,9 +45,6 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: 21px 18px;
-    /* hide text, since we're using it as description for accessibility */
-    font-size: 0px;
-    line-height: 0px;
 }
 .card__love-button:hover {
     opacity: 0.5;

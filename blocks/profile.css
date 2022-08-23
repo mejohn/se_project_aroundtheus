@@ -44,9 +44,6 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: 10px 10px;
-    /* hide text, since we're using it as description for accessibility */
-    font-size: 0px;
-    line-height: 0px;
 }
 .profile__edit-button:hover {
     /* figma didn't have an opacity listed, but the style definitely changed */
@@ -54,9 +51,6 @@
 }
 .profile__description {
     margin: 0;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 1.2;
 }
 .profile__add-button {
     margin: 0;
@@ -70,9 +64,6 @@
     background-image: url("../images/add-plus.svg");
     background-position: center;
     background-repeat: no-repeat;
-    /* hide text, since we're using it as description for accessibility */
-    font-size: 0px;
-    line-height: 0px;
 }
 .profile__add-button:hover {
     opacity: 0.6;
@@ -82,7 +73,6 @@
         padding: 45px 95px 40px;
     }
     .profile__name-title {
-        font-weight: 500;
         font-size: 32px;
     }
     .profile__add-button {
@@ -90,9 +80,6 @@
     }
 }
 @media (min-width: 320px) and (max-width: 750px) {
-/*
-}
-@media (min-width: 320px) and (max-width: 470px) {*/
     .profile {
         padding: 38px 19px 36px;
         flex-direction: column;
@@ -100,7 +87,6 @@
         justify-content: center;
     }
     .profile__name-title {
-        font-weight: 500;
         font-size: 22px;
     }
     .profile__avatar {
@@ -113,9 +99,11 @@
     .profile__edit-button {
         height: 18px;
         width: 18px;
+        background-size: 7.5px 7.5px;
         margin: 0 0 0 10px;
     }
     .profile__add-button {
         width: 282px;
+        background-size: 16px 16px;
     }
 }
