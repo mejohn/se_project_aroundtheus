@@ -7,7 +7,7 @@
     .logo {
         width: 142px;
         height: 28px;
-        margin: 0 0 36px 4px;
+        margin: 0 0 36px 15px;
     }
 }
 @media (min-width: 320px) and (max-width: 470px) {

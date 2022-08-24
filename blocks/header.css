@@ -1,16 +1,18 @@
 .header {
     box-sizing: border-box;
-    padding: 45px 200px 0;
+    padding: 45px 0 0 0;
     border-bottom: 1px solid rgba(84,84,84,0.7);
     -webkit-background-clip: padding-box; /* for Safari */
     background-clip: padding-box; /* Firefox 4+, Opera, Chrome */
+    max-width: 880px;
+    margin: 0 auto;
 }
 .header__link {
     text-decoration: none;
 }
 @media (min-width: 471px) and (max-width: 1120px) {
     .header {
-        padding: 36px 95px 0;
+        padding: 36px 95px 0 0;
     }
 }
 @media (min-width: 320px) and (max-width: 470px) {
