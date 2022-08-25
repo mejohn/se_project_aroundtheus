@@ -8,6 +8,7 @@
 }
 .card__image {
     width: 100%;
+    height: 282px;
     margin: 0;
     padding: 0;
     /* this removes the extra gap below the image that html
@@ -45,6 +46,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: 21px 18px;
+    transition: opacity 0.5s ease;
 }
 .card__love-button:hover {
     opacity: 0.5;

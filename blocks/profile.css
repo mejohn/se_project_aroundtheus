@@ -44,6 +44,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: 10px 10px;
+    transition: opacity 0.5s ease;
 }
 .profile__edit-button:hover {
     /* figma didn't have an opacity listed, but the style definitely changed */
@@ -64,6 +65,7 @@
     background-image: url("../images/add-plus.svg");
     background-position: center;
     background-repeat: no-repeat;
+    transition: opacity 0.5s ease;
 }
 .profile__add-button:hover {
     opacity: 0.6;

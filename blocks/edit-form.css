@@ -1,0 +1,36 @@
+.edit-form {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+.edit-form__fieldset {
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+.edit-form__input {
+    font-size: 14px;
+    border: none;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    width: 100%;
+    padding: 13px 0;
+    margin: 16px 0 0;
+}
+/* this styling was not in figma but was on the screenshots */
+.form__input::placeholder {
+    color: #838383;
+    opacity: 1;
+}
+.edit-form__save-button {
+    height: 50px;
+    border-radius: 2px;
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    margin-top: 48px;
+    width: 100%;
+}
+.edit-form__save-button:hover {
+    opacity: 0.8;
+}

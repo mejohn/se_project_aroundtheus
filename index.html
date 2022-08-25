@@ -35,54 +35,39 @@
         </section>
         <section class="locations">
           <ul class="locations__cards">
-            <li class="card">
-              <img class="card__image" src="./images/yosemite-valley.jpg" alt="Picture of Yosemite Valley">
-              <div class="card__footer">
-                <h3 class="card__title">Yosemite Valley</h3>
-                <button class="card__love-button" type="button" aria-label="Love this post"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img class="card__image" src="./images/lake-louise.png" alt="Picture of Lake Louise">
-              <div class="card__footer">
-                <h3 class="card__title">Lake Louise</h3>
-                <button class="card__love-button" type="button" aria-label="Love this post"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img class="card__image" src="./images/bald-mountains.png"  alt="Picture of Bald Mountains">
-              <div class="card__footer">
-                <h3 class="card__title">Bald Mountains</h3>
-                <button class="card__love-button" type="button" aria-label="Love this post"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img class="card__image" src="./images/latemar.png"  alt="Picture of Latemar">
-              <div class="card__footer">
-                <h3 class="card__title">Latemar</h3>
-                <button class="card__love-button" type="button" aria-label="Love this post"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img class="card__image" src="./images/vanoise-national-park.png"  alt="Picture of Vanoise National Park">
-              <div class="card__footer">
-                <h3 class="card__title">Vanoise National Park</h3>
-                <button class="card__love-button" type="button" aria-label="Love this post"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img class="card__image" src="./images/lago-di-braies.png"  alt="Picture of Lago di Braies">
-              <div class="card__footer">
-                <h3 class="card__title">Lago di Braies</h3>
-                <button class="card__love-button" type="button" aria-label="Love this post"></button>
-              </div>
-            </li>
           </ul>
         </section>
+        <div class="modal">
+          <div class="modal__container">
+            <div class="modal__area">
+              <div class="modal__content">
+                <h3 class="modal__title">Edit profile</h3>
+                <form class="edit-form">
+                  <fieldset class="edit-form__fieldset">
+                    <input type="text" class="edit-form__input" id="name" name="name" placeholder="Name" />
+                    <input type="text" class="edit-form__input" id="description" name="description" placeholder="Description" />
+                    <button type="submit" class="edit-form__save-button">Save</button>
+                  </fieldset>
+                </form>
+                </div>
+                <button class="modal__close-button" type="button" aria-label="Close this modal"></button>
+            </div>
+          </div>
+        </div>
       </main>
       <footer class="footer">
         <p class="footer__copyright">© 2022 Around The U.S.</p>
       </footer>
     </div>
+    <template id="card-template">
+      <li class="card">
+        <img class="card__image" src=""  alt="">
+        <div class="card__footer">
+          <h3 class="card__title"></h3>
+          <button class="card__love-button" type="button" aria-label="Love this post"></button>
+        </div>
+      </li>
+    </template>
+    <script type="text/javascript" src="./scripts/index.js"></script>
   </body>
 </html>
