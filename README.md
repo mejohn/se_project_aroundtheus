@@ -16,6 +16,9 @@ Mobile Resolution Screenshot
 
 ![screenshot of mobile resolution](./images/demo/mobile_screenshot.png)
 
+Edit Modal Screenshot
+
+![screenshot of edit modal](./images/demo/edit-modal_screenshot.png)
 
 
 ### Overview  
