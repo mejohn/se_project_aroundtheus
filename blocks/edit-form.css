@@ -18,7 +18,7 @@
     margin: 16px 0 0;
 }
 /* this styling was not in figma but was on the screenshots */
-.form__input::placeholder {
+.edit-form__input::placeholder {
     color: #838383;
     opacity: 1;
 }

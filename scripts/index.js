@@ -1,11 +1,22 @@
-let editModal = document.querySelector(".modal__container");
+const editModal = document.querySelector(".modal");
+
+const nameTitle = document.querySelector(".profile__name-title");
+const jobDescription = document.querySelector(".profile__description");
+
+/* thanks for the tip on using named form access! */
+const profileForm = document.forms.editProfileForm;
+const nameInput = profileForm.elements.name;
+const jobInput = profileForm.elements.description;
 
 function handleOpenEditModal(evt) {
-    editModal.classList.add("modal__container_modal_opened");
+    editModal.classList.add("modal__modal_opened");
+
+    nameInput.value = nameTitle.textContent;
+    jobInput.value = jobDescription.textContent;
 }
 
 function handleCloseEditModal(evt) {
-    editModal.classList.remove("modal__container_modal_opened");
+    editModal.classList.remove("modal__modal_opened");
 }
 
 const editButton = document.querySelector(".profile__edit-button");
@@ -13,14 +24,6 @@ editButton.addEventListener("click", handleOpenEditModal);
 
 const profileModalCloseBtn = document.querySelector(".modal__close-button");
 profileModalCloseBtn.addEventListener("click", handleCloseEditModal);
-
-const profileFormElement = document.querySelector(".edit-form");
-
-const nameInput = profileFormElement.querySelector("#name");
-const jobInput = profileFormElement.querySelector("#description");
-
-const nameTitle = document.querySelector(".profile__name-title");
-const jobDescription = document.querySelector(".profile__description");
 
 function handleProfileFormSubmit(evt) {
     evt.preventDefault();
@@ -31,9 +34,10 @@ function handleProfileFormSubmit(evt) {
     nameTitle.textContent = newName;
     jobDescription.textContent = newJob;
 
-    editModal.classList.remove("modal__container_modal_opened");
+    handleCloseEditModal();
 }
 
+const profileFormElement = document.querySelector(".edit-form");
 profileFormElement.addEventListener("submit", handleProfileFormSubmit);
 
 const initialCards = [
@@ -67,8 +71,9 @@ function getCardElement(data) {
     const cardTemplate = document.querySelector("#card-template").content;
     let cardElement = cardTemplate.cloneNode(true);
 
-    cardElement.querySelector(".card__image").src = data.link;
-    cardElement.querySelector(".card__image").alt = data.name;
+    let cardImageElement = cardElement.querySelector(".card__image");
+    cardImageElement.src = data.link;
+    cardImageElement.alt = data.name;
     cardElement.querySelector(".card__title").textContent = data.name;
 
     return cardElement;
