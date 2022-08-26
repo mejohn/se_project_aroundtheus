@@ -37,25 +37,25 @@
           <ul class="locations__cards">
           </ul>
         </section>
-        <div class="modal">
-          <div class="modal__area">
-            <div class="modal__content">
-              <h3 class="modal__title">Edit profile</h3>
-              <form class="edit-form" name="editProfileForm">
-                <fieldset class="edit-form__fieldset">
-                  <input type="text" class="edit-form__input" name="name" placeholder="Name" />
-                  <input type="text" class="edit-form__input" name="description" placeholder="Description" />
-                  <button type="submit" class="edit-form__save-button">Save</button>
-                </fieldset>
-              </form>
-            </div>
-            <button class="modal__close-button" type="button" aria-label="Close this modal"></button>
-          </div>
-        </div>
       </main>
       <footer class="footer">
         <p class="footer__copyright">© 2022 Around The U.S.</p>
       </footer>
+    </div>
+    <div class="modal">
+      <div class="modal__area">
+        <div class="modal__content">
+          <h3 class="modal__title">Edit profile</h3>
+          <form class="edit-form" name="editProfileForm">
+            <fieldset class="edit-form__fieldset">
+              <input type="text" class="edit-form__input" name="name" placeholder="Name" required />
+              <input type="text" class="edit-form__input" name="description" placeholder="Description" required />
+              <button type="submit" class="edit-form__save-button">Save</button>
+            </fieldset>
+          </form>
+        </div>
+        <button class="modal__close-button" type="button" aria-label="Close this modal"></button>
+      </div>
     </div>
     <template id="card-template">
       <li class="card">

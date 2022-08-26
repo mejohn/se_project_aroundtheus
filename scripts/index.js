@@ -9,14 +9,14 @@ const nameInput = profileForm.elements.name;
 const jobInput = profileForm.elements.description;
 
 function handleOpenEditModal(evt) {
-    editModal.classList.add("modal__modal_opened");
+    editModal.classList.add("modal_opened");
 
     nameInput.value = nameTitle.textContent;
     jobInput.value = jobDescription.textContent;
 }
 
 function handleCloseEditModal(evt) {
-    editModal.classList.remove("modal__modal_opened");
+    editModal.classList.remove("modal_opened");
 }
 
 const editButton = document.querySelector(".profile__edit-button");
