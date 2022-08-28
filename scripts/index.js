@@ -1,4 +1,4 @@
-const editProfileModal = document.querySelector(".modal__edit-profile");
+const editProfileModal = document.querySelector(".modal_type_edit-profile");
 const profileFormElement = document.forms.editProfileForm;
 const editProfileMapping = [
     {
@@ -12,7 +12,7 @@ const editProfileMapping = [
         displayElement: document.querySelector(".profile__description")
     }
 ]
-const addLocationModal = document.querySelector(".modal__add-location")
+const addLocationModal = document.querySelector(".modal_type_add-location")
 const locationFormElement = document.forms.addLocationForm;
 const addLocationMapping = [
     {
@@ -24,7 +24,7 @@ const addLocationMapping = [
         inputElement: locationFormElement.elements.title
     }
 ];
-const imageModal = document.querySelector(".modal__show-image");
+const imageModal = document.querySelector(".modal_type_show-image");
 
 function fillModalForm(fieldMapping) {
     fieldMapping.forEach(({inputElement, displayElement}) => {
