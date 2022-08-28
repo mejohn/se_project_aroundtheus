@@ -42,7 +42,7 @@
         <p class="footer__copyright">© 2022 Around The U.S.</p>
       </footer>
     </div>
-    <div class="modal">
+    <div class="modal modal__edit-profile">
       <div class="modal__area">
         <div class="modal__content">
           <h3 class="modal__title">Edit profile</h3>
@@ -57,9 +57,36 @@
         <button class="modal__close-button" type="button" aria-label="Close this modal"></button>
       </div>
     </div>
+    <div class="modal modal__add-location">
+      <div class="modal__area">
+        <div class="modal__content">
+          <h3 class="modal__title">New Place</h3>
+          <form class="edit-form" name="addLocationForm">
+            <fieldset class="edit-form__fieldset">
+              <input type="text" class="edit-form__input" name="title" placeholder="Title" required />
+              <input type="text" class="edit-form__input" name="url" placeholder="Image URL" required />
+              <button type="submit" class="edit-form__save-button">Create</button>
+            </fieldset>
+          </form>
+        </div>
+        <button class="modal__close-button" type="button" aria-label="Close this modal"></button>
+      </div>
+    </div>
+    <div class="modal modal__show-image">
+      <div class="modal__area">
+        <div class="modal__content-image">
+          <img src="" alt="" class="modal__image">
+          <p class="modal__image-caption"></p>
+        </div>
+        <button class="modal__close-button" type="button" aria-label="Close this modal"></button>
+      </div>
+    </div>
     <template id="card-template">
       <li class="card">
-        <img class="card__image" src=""  alt="">
+        <div class="card__image-cover">
+          <img class="card__image" src=""  alt="">
+          <button class="card__delete-button" type="button" aria-label="Delete this post"></button>
+        </div>
         <div class="card__footer">
           <h3 class="card__title"></h3>
           <button class="card__love-button" type="button" aria-label="Love this post"></button>

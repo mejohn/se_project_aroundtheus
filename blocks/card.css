@@ -16,6 +16,31 @@
     */
     display: flex;
 }
+.card__image-cover {
+    position: relative;
+    flex-grow: 1;
+    flex-shrink: 0;
+}
+.card__delete-button {
+    width: 18px;
+    height: 19px;
+    border: none;
+    margin: 0;
+    /* set both in case browser doesn't support alpha */
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0);
+    background-image: url("../images/trash.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 18px 19px;
+    transition: opacity 0.5s ease;
+    position: absolute;
+    right: 15px;
+    top: 18px;
+}
+.card__delete-button:hover {
+    opacity: 0.6;
+}
 .card__footer {
     display: flex;
     justify-content: space-between;
@@ -47,6 +72,9 @@
     background-repeat: no-repeat;
     background-size: 21px 18px;
     transition: opacity 0.5s ease;
+}
+.card__love-button_loved {
+    background-image: url("../images/heart-full.svg");
 }
 .card__love-button:hover {
     opacity: 0.5;

@@ -1,44 +1,100 @@
-const editModal = document.querySelector(".modal");
+const editProfileModal = document.querySelector(".modal__edit-profile");
+const profileFormElement = document.forms.editProfileForm;
+const editProfileMapping = [
+    {
+        field: "name", 
+        inputElement: profileFormElement.elements.name,
+        displayElement: document.querySelector(".profile__name-title")
+    },
+    {
+        field: "description",
+        inputElement: profileFormElement.elements.description,
+        displayElement: document.querySelector(".profile__description")
+    }
+]
+const addLocationModal = document.querySelector(".modal__add-location")
+const locationFormElement = document.forms.addLocationForm;
+const addLocationMapping = [
+    {
+        field: "url",
+        inputElement: locationFormElement.elements.url,
+    },
+    {
+        field: "title",
+        inputElement: locationFormElement.elements.title
+    }
+];
+const imageModal = document.querySelector(".modal__show-image");
 
-const nameTitle = document.querySelector(".profile__name-title");
-const jobDescription = document.querySelector(".profile__description");
-
-/* thanks for the tip on using named form access! */
-const profileForm = document.forms.editProfileForm;
-const nameInput = profileForm.elements.name;
-const jobInput = profileForm.elements.description;
-
-function handleOpenEditModal(evt) {
-    editModal.classList.add("modal_opened");
-
-    nameInput.value = nameTitle.textContent;
-    jobInput.value = jobDescription.textContent;
+function fillModalForm(fieldMapping) {
+    fieldMapping.forEach(({inputElement, displayElement}) => {
+        inputElement.value = displayElement.textContent;
+    })
 }
 
-function handleCloseEditModal(evt) {
-    editModal.classList.remove("modal_opened");
+function fillImageModal(modalElement, imageMapping) {
+    const modalImage = modalElement.querySelector(".modal__image");
+    modalImage.src = imageMapping.link;
+    modalImage.alt = imageMapping.name;
+    modalElement.querySelector(".modal__image-caption").textContent = imageMapping.name;
 }
 
-const editButton = document.querySelector(".profile__edit-button");
-editButton.addEventListener("click", handleOpenEditModal);
+function handleOpenModal(modalElement, fieldMapping, imageMapping) {
+    modalElement.classList.add("modal_opened");
+    if (fieldMapping.length) {
+        fillModalForm(fieldMapping); 
+    } else if (imageMapping) {
+        fillImageModal(modalElement, imageMapping);
+    }
+}
 
-const profileModalCloseBtn = document.querySelector(".modal__close-button");
-profileModalCloseBtn.addEventListener("click", handleCloseEditModal);
+function handleCloseModal(modalElement, fieldMapping) {
+    modalElement.classList.remove("modal_opened");
+    if(fieldMapping.length) {
+        fieldMapping.forEach(({inputElement}) => {
+            inputElement.value = "";
+        });
+    }
+}
 
-function handleProfileFormSubmit(evt) {
+const editProfileButton = document.querySelector(".profile__edit-button");
+editProfileButton.addEventListener("click", () => {
+    handleOpenModal(editProfileModal, editProfileMapping);
+});
+
+const profileModalCloseBtn = editProfileModal.querySelector(".modal__close-button");
+profileModalCloseBtn.addEventListener("click", () => {
+    handleCloseModal(editProfileModal, editProfileMapping);
+});
+
+const addLocationButton = document.querySelector(".profile__add-button");
+addLocationButton.addEventListener("click", () => {
+    handleOpenModal(addLocationModal, []);
+});
+
+const locationModalCloseBtn = addLocationModal.querySelector(".modal__close-button");
+locationModalCloseBtn.addEventListener("click", () => {
+    handleCloseModal(addLocationModal, addLocationMapping);
+})
+
+const imageModalCloseBtn = imageModal.querySelector(".modal__close-button");
+imageModalCloseBtn.addEventListener("click", () => {
+    handleCloseModal(imageModal, []);
+});
+
+function handleProfileFormSubmit(evt, fieldMapping) {
     evt.preventDefault();
 
-    let newName = nameInput.value;
-    let newJob = jobInput.value;
+    fieldMapping.forEach(({inputElement, displayElement}) => {
+        displayElement.textContent = inputElement.value;
+    })
 
-    nameTitle.textContent = newName;
-    jobDescription.textContent = newJob;
-
-    handleCloseEditModal();
+    handleCloseModal(editProfileModal, editProfileMapping);
 }
 
-const profileFormElement = document.querySelector(".edit-form");
-profileFormElement.addEventListener("submit", handleProfileFormSubmit);
+profileFormElement.addEventListener("submit", (evt) => {
+    handleProfileFormSubmit(evt, editProfileMapping);
+});
 
 const initialCards = [
     {
@@ -66,20 +122,48 @@ const initialCards = [
         "link": "https://code.s3.yandex.net/web-code/lago.jpg"
     },
 ];
+function deleteCard(evt) {
+    evt.target.parentElement.parentElement.remove();
+}
 
 function getCardElement(data) {
     const cardTemplate = document.querySelector("#card-template").content;
-    let cardElement = cardTemplate.cloneNode(true);
+    const cardElement = cardTemplate.cloneNode(true);
 
-    let cardImageElement = cardElement.querySelector(".card__image");
+    const cardImageElement = cardElement.querySelector(".card__image");
     cardImageElement.src = data.link;
     cardImageElement.alt = data.name;
     cardElement.querySelector(".card__title").textContent = data.name;
+
+    cardImageElement.addEventListener("click", () => {
+        handleOpenModal(imageModal, [], data)
+    })
+    const loveButton = cardElement.querySelector(".card__love-button");
+    loveButton.addEventListener("click", () => {
+        loveButton.classList.toggle("card__love-button_loved");
+    })
+
+    const deleteButton = cardElement.querySelector(".card__delete-button");
+    deleteButton.addEventListener("click", deleteCard);
 
     return cardElement;
 }
 
 const cardListElement = document.querySelector(".locations__cards")
-for(let i=0; i < initialCards.length; i++) {
-    cardListElement.append(getCardElement(initialCards[i]));
+initialCards.forEach((card) => {
+    cardListElement.append(getCardElement(card));
+});
+
+function handleLocationFormSubmit(evt) {
+    evt.preventDefault();
+    const data = {
+        name: locationFormElement.elements.title.value,
+        link: locationFormElement.elements.url.value,
+    }
+    
+    cardListElement.prepend(getCardElement(data));
+    handleCloseModal(addLocationModal, addLocationMapping);
 }
+
+locationFormElement.addEventListener("submit", handleLocationFormSubmit);
+
