@@ -25,6 +25,8 @@ const addLocationMapping = [
     }
 ];
 const imageModal = document.querySelector(".modal_type_show-image");
+const imageModalImage = imageModal.querySelector(".modal__image");
+const imageModalCaption = imageModal.querySelector(".modal__image-caption");
 
 function fillModalForm(fieldMapping) {
     fieldMapping.forEach(({inputElement, displayElement}) => {
@@ -32,55 +34,39 @@ function fillModalForm(fieldMapping) {
     })
 }
 
-function fillImageModal(modalElement, imageMapping) {
-    const modalImage = modalElement.querySelector(".modal__image");
-    modalImage.src = imageMapping.link;
-    modalImage.alt = imageMapping.name;
-    modalElement.querySelector(".modal__image-caption").textContent = imageMapping.name;
+function fillImageModal(imageMapping) {
+    imageModalImage.src = imageMapping.link;
+    imageModalImage.alt = imageMapping.name;
+    imageModalCaption.textContent = imageMapping.name;
 }
 
-function handleOpenModal(modalElement, fieldMapping, imageMapping) {
+function handleOpenModal(modalElement) {
     modalElement.classList.add("modal_opened");
-    if (fieldMapping.length) {
-        fillModalForm(fieldMapping); 
-    } else if (imageMapping) {
-        fillImageModal(modalElement, imageMapping);
-    }
 }
 
-function handleCloseModal(modalElement, fieldMapping) {
+function handleCloseModal(modalElement) {
     modalElement.classList.remove("modal_opened");
-    if(fieldMapping.length) {
-        fieldMapping.forEach(({inputElement}) => {
-            inputElement.value = "";
-        });
-    }
 }
 
 const editProfileButton = document.querySelector(".profile__edit-button");
 editProfileButton.addEventListener("click", () => {
-    handleOpenModal(editProfileModal, editProfileMapping);
-});
-
-const profileModalCloseBtn = editProfileModal.querySelector(".modal__close-button");
-profileModalCloseBtn.addEventListener("click", () => {
-    handleCloseModal(editProfileModal, editProfileMapping);
+    handleOpenModal(editProfileModal);
+    fillModalForm(editProfileMapping); 
 });
 
 const addLocationButton = document.querySelector(".profile__add-button");
 addLocationButton.addEventListener("click", () => {
-    handleOpenModal(addLocationModal, []);
+    handleOpenModal(addLocationModal);
 });
 
-const locationModalCloseBtn = addLocationModal.querySelector(".modal__close-button");
-locationModalCloseBtn.addEventListener("click", () => {
-    handleCloseModal(addLocationModal, addLocationMapping);
+// find all modal close buttons
+const modalCloseButtons = Array.from(document.querySelectorAll(".modal__close-button"));
+modalCloseButtons.forEach((button) => {
+    const modal = button.closest(".modal");
+    button.addEventListener("click", () => {
+        handleCloseModal(modal);
+    })
 })
-
-const imageModalCloseBtn = imageModal.querySelector(".modal__close-button");
-imageModalCloseBtn.addEventListener("click", () => {
-    handleCloseModal(imageModal, []);
-});
 
 function handleProfileFormSubmit(evt, fieldMapping) {
     evt.preventDefault();
@@ -89,7 +75,8 @@ function handleProfileFormSubmit(evt, fieldMapping) {
         displayElement.textContent = inputElement.value;
     })
 
-    handleCloseModal(editProfileModal, editProfileMapping);
+    handleCloseModal(editProfileModal);
+    evt.target.reset();
 }
 
 profileFormElement.addEventListener("submit", (evt) => {
@@ -123,7 +110,7 @@ const initialCards = [
     },
 ];
 function deleteCard(evt) {
-    evt.target.parentElement.parentElement.remove();
+    evt.target.closest(".card").remove();
 }
 
 function getCardElement(data) {
@@ -136,7 +123,8 @@ function getCardElement(data) {
     cardElement.querySelector(".card__title").textContent = data.name;
 
     cardImageElement.addEventListener("click", () => {
-        handleOpenModal(imageModal, [], data)
+        handleOpenModal(imageModal);
+        fillImageModal(data);
     })
     const loveButton = cardElement.querySelector(".card__love-button");
     loveButton.addEventListener("click", () => {
@@ -162,7 +150,8 @@ function handleLocationFormSubmit(evt) {
     }
     
     cardListElement.prepend(getCardElement(data));
-    handleCloseModal(addLocationModal, addLocationMapping);
+    handleCloseModal(addLocationModal);
+    evt.target.reset();
 }
 
 locationFormElement.addEventListener("submit", handleLocationFormSubmit);
