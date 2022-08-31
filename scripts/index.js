@@ -1,5 +1,6 @@
 const editProfileModal = document.querySelector(".modal_type_edit-profile");
 const profileFormElement = document.forms.editProfileForm;
+const profileSaveBtn = profileFormElement.querySelector(".edit-form__save-button");
 const editProfileMapping = [
     {
         field: "name", 
@@ -14,6 +15,7 @@ const editProfileMapping = [
 ]
 const addLocationModal = document.querySelector(".modal_type_add-location")
 const locationFormElement = document.forms.addLocationForm;
+const locationSaveBtn = locationFormElement.querySelector(".edit-form__save-button")
 const addLocationMapping = [
     {
         field: "url",
@@ -77,6 +79,7 @@ function handleProfileFormSubmit(evt, fieldMapping) {
 
     handleCloseModal(editProfileModal);
     evt.target.reset();
+    profileSaveBtn.classList.add("edit-form__save-button_disabled")
 }
 
 profileFormElement.addEventListener("submit", (evt) => {
@@ -152,6 +155,7 @@ function handleLocationFormSubmit(evt) {
     cardListElement.prepend(getCardElement(data));
     handleCloseModal(addLocationModal);
     evt.target.reset();
+    locationSaveBtn.classList.add("edit-form__save-button_disabled");
 }
 
 locationFormElement.addEventListener("submit", handleLocationFormSubmit);

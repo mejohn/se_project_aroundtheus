@@ -24,13 +24,11 @@
       <main>
         <section class="profile">
           <img class="profile__avatar" src="./images/jacques-cousteau-1.jpg" alt="Profile picture for Jacques Cousteau">
-          <div class="profile__content">
-            <div class="profile__name">
-              <h1 class="profile__name-title">Jacques Cousteau</h1>
-              <button class="profile__edit-button" type="button" aria-label="Edit Profile Name"></button>
-            </div>
-            <p class="profile__description">Explorer</p>
+          <div class="profile__name">
+            <h1 class="profile__name-title">Jacques Cousteau Meaghan Elizabeth Mahon</h1>
+            <button class="profile__edit-button" type="button" aria-label="Edit Profile Name"></button>
           </div>
+          <p class="profile__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut a</p>
           <button class="profile__add-button" type="button" aria-label="Add a new location"></button>
         </section>
         <section class="locations">
@@ -48,8 +46,8 @@
           <h3 class="modal__title">Edit profile</h3>
           <form class="edit-form" name="editProfileForm">
             <fieldset class="edit-form__fieldset">
-              <input type="text" class="edit-form__input" name="name" placeholder="Name" required />
-              <input type="text" class="edit-form__input" name="description" placeholder="Description" required />
+              <input type="text" class="edit-form__input" name="name" placeholder="Name" minlength="2" maxlength="40" required />
+              <input type="text" class="edit-form__input" name="description" placeholder="Description" minlength="2" maxlength="200" required />
               <button type="submit" class="edit-form__save-button">Save</button>
             </fieldset>
           </form>
@@ -63,7 +61,7 @@
           <h3 class="modal__title">New Place</h3>
           <form class="edit-form" name="addLocationForm">
             <fieldset class="edit-form__fieldset">
-              <input type="text" class="edit-form__input" name="title" placeholder="Title" required />
+              <input type="text" class="edit-form__input" name="title" placeholder="Title" minlength="1" maxlength="30" required />
               <input type="text" class="edit-form__input" name="url" placeholder="Image URL" required />
               <button type="submit" class="edit-form__save-button">Create</button>
             </fieldset>
