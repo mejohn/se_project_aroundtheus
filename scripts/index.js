@@ -1,5 +1,6 @@
 const editProfileModal = document.querySelector(".modal_type_edit-profile");
 const profileFormElement = document.forms.editProfileForm;
+const profileSaveBtn = profileFormElement.querySelector(".edit-form__save-button");
 const editProfileMapping = [
     {
         field: "name", 
@@ -14,6 +15,7 @@ const editProfileMapping = [
 ]
 const addLocationModal = document.querySelector(".modal_type_add-location")
 const locationFormElement = document.forms.addLocationForm;
+const locationSaveBtn = locationFormElement.querySelector(".edit-form__save-button")
 const addLocationMapping = [
     {
         field: "url",
@@ -42,9 +44,13 @@ function fillImageModal(imageMapping) {
 
 function handleOpenModal(modalElement) {
     modalElement.classList.add("modal_opened");
+    document.addEventListener("keyup", handleEscPress);
+    modalElement.addEventListener("click", handleOverlayClick);
 }
 
 function handleCloseModal(modalElement) {
+    document.removeEventListener("keyup", handleEscPress);
+    modalElement.removeEventListener("click", handleOverlayClick);
     modalElement.classList.remove("modal_opened");
 }
 
@@ -156,3 +162,17 @@ function handleLocationFormSubmit(evt) {
 
 locationFormElement.addEventListener("submit", handleLocationFormSubmit);
 
+function handleEscPress(evt) {
+    const modal = document.querySelector(".modal_opened");
+    if(modal && evt.key == "Escape") {
+        handleCloseModal(modal);
+    }
+}
+
+function handleOverlayClick(evt) {
+    const modal = document.querySelector(".modal_opened");
+    console.log(evt, modal)
+    if(modal && !evt.target.closest(".modal__opened")) {
+        handleCloseModal(modal);
+    }
+}
