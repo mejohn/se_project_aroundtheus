@@ -22,6 +22,13 @@
     color: #838383;
     opacity: 1;
 }
+.edit-form__input_type_error {
+    border-bottom: 1px solid #ff0000;
+}
+.edit-form__error_visible {
+    color: #ff0000;
+    font-size: 12px;
+}
 .edit-form__save-button {
     height: 50px;
     border-radius: 2px;
@@ -40,4 +47,8 @@
     color: #000000;
     opacity: 0.2;
     border: 1px solid #000000;
+}
+
+.edit-form__save-button_disabled:hover {
+    opacity: 0.2
 }

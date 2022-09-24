@@ -44,9 +44,13 @@ function fillImageModal(imageMapping) {
 
 function handleOpenModal(modalElement) {
     modalElement.classList.add("modal_opened");
+    document.addEventListener("keyup", handleEscPress);
+    modalElement.addEventListener("click", handleOverlayClick);
 }
 
 function handleCloseModal(modalElement) {
+    document.removeEventListener("keyup", handleEscPress);
+    modalElement.removeEventListener("click", handleOverlayClick);
     modalElement.classList.remove("modal_opened");
 }
 
@@ -79,7 +83,6 @@ function handleProfileFormSubmit(evt, fieldMapping) {
 
     handleCloseModal(editProfileModal);
     evt.target.reset();
-    profileSaveBtn.classList.add("edit-form__save-button_disabled")
 }
 
 profileFormElement.addEventListener("submit", (evt) => {
@@ -155,8 +158,21 @@ function handleLocationFormSubmit(evt) {
     cardListElement.prepend(getCardElement(data));
     handleCloseModal(addLocationModal);
     evt.target.reset();
-    locationSaveBtn.classList.add("edit-form__save-button_disabled");
 }
 
 locationFormElement.addEventListener("submit", handleLocationFormSubmit);
 
+function handleEscPress(evt) {
+    const modal = document.querySelector(".modal_opened");
+    if(modal && evt.key == "Escape") {
+        handleCloseModal(modal);
+    }
+}
+
+function handleOverlayClick(evt) {
+    const modal = document.querySelector(".modal_opened");
+    console.log(evt, modal)
+    if(modal && !evt.target.closest(".modal__opened")) {
+        handleCloseModal(modal);
+    }
+}

@@ -16,6 +16,7 @@
         <a class="header__link" href="#">
           <img
             src="./images/logo.svg"
+            
             alt="Around the U.S. Logo"
             class="logo"
           />
@@ -25,10 +26,10 @@
         <section class="profile">
           <img class="profile__avatar" src="./images/jacques-cousteau-1.jpg" alt="Profile picture for Jacques Cousteau">
           <div class="profile__name">
-            <h1 class="profile__name-title">Jacques Cousteau Meaghan Elizabeth Mahon</h1>
+            <h1 class="profile__name-title">Jacques Cousteau</h1>
             <button class="profile__edit-button" type="button" aria-label="Edit Profile Name"></button>
           </div>
-          <p class="profile__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut a</p>
+          <p class="profile__description">Explorer</p>
           <button class="profile__add-button" type="button" aria-label="Add a new location"></button>
         </section>
         <section class="locations">
@@ -44,10 +45,12 @@
       <div class="modal__area">
         <div class="modal__content">
           <h3 class="modal__title">Edit profile</h3>
-          <form class="edit-form" name="editProfileForm">
+          <form class="edit-form" name="editProfileForm" novalidate>
             <fieldset class="edit-form__fieldset">
-              <input type="text" class="edit-form__input" name="name" placeholder="Name" minlength="2" maxlength="40" required />
-              <input type="text" class="edit-form__input" name="description" placeholder="Description" minlength="2" maxlength="200" required />
+              <input type="text" class="edit-form__input" id="profile-name" name="name" placeholder="Name" minlength="2" maxlength="40" required />
+              <span class="edit-form__error profile-name-error"></span>
+              <input type="text" class="edit-form__input" id="profile-desc" name="description" placeholder="Description" minlength="2" maxlength="200" required />
+              <span class="edit-form__eror profile-desc-error"></span>
               <button type="submit" class="edit-form__save-button">Save</button>
             </fieldset>
           </form>
@@ -59,10 +62,12 @@
       <div class="modal__area">
         <div class="modal__content">
           <h3 class="modal__title">New Place</h3>
-          <form class="edit-form" name="addLocationForm">
+          <form class="edit-form" name="addLocationForm" novalidate>
             <fieldset class="edit-form__fieldset">
-              <input type="text" class="edit-form__input" name="title" placeholder="Title" minlength="1" maxlength="30" required />
-              <input type="text" class="edit-form__input" name="url" placeholder="Image URL" required />
+              <input type="text" class="edit-form__input" id="location-title" name="title" placeholder="Title" minlength="1" maxlength="30" required />
+              <span class="edit-form__error location-title-error"></span>
+              <input type="url" class="edit-form__input" id="location-url" name="url" placeholder="Image URL" required />
+              <span class="edit-form__error location-url-error"></span>
               <button type="submit" class="edit-form__save-button">Create</button>
             </fieldset>
           </form>
@@ -92,5 +97,6 @@
       </li>
     </template>
     <script type="text/javascript" src="./scripts/index.js"></script>
+    <script type="text/javascript" src="./scripts/validate.js"></script>
   </body>
 </html>
