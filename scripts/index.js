@@ -1,93 +1,7 @@
-const editProfileModal = document.querySelector(".modal_type_edit-profile");
-const profileFormElement = document.forms.editProfileForm;
-const profileSaveBtn = profileFormElement.querySelector(".edit-form__save-button");
-const editProfileMapping = [
-    {
-        field: "name", 
-        inputElement: profileFormElement.elements.name,
-        displayElement: document.querySelector(".profile__name-title")
-    },
-    {
-        field: "description",
-        inputElement: profileFormElement.elements.description,
-        displayElement: document.querySelector(".profile__description")
-    }
-]
-const addLocationModal = document.querySelector(".modal_type_add-location")
-const locationFormElement = document.forms.addLocationForm;
-const locationSaveBtn = locationFormElement.querySelector(".edit-form__save-button")
-const addLocationMapping = [
-    {
-        field: "url",
-        inputElement: locationFormElement.elements.url,
-    },
-    {
-        field: "title",
-        inputElement: locationFormElement.elements.title
-    }
-];
-const imageModal = document.querySelector(".modal_type_show-image");
-const imageModalImage = imageModal.querySelector(".modal__image");
-const imageModalCaption = imageModal.querySelector(".modal__image-caption");
+import Card from "./Card.js";
+import FormValidator from "./FormValidator.js";
 
-function fillModalForm(fieldMapping) {
-    fieldMapping.forEach(({inputElement, displayElement}) => {
-        inputElement.value = displayElement.textContent;
-    })
-}
-
-function fillImageModal(imageMapping) {
-    imageModalImage.src = imageMapping.link;
-    imageModalImage.alt = imageMapping.name;
-    imageModalCaption.textContent = imageMapping.name;
-}
-
-function handleOpenModal(modalElement) {
-    modalElement.classList.add("modal_opened");
-    document.addEventListener("keyup", handleEscPress);
-    modalElement.addEventListener("click", handleOverlayClick);
-}
-
-function handleCloseModal(modalElement) {
-    document.removeEventListener("keyup", handleEscPress);
-    modalElement.removeEventListener("click", handleOverlayClick);
-    modalElement.classList.remove("modal_opened");
-}
-
-const editProfileButton = document.querySelector(".profile__edit-button");
-editProfileButton.addEventListener("click", () => {
-    handleOpenModal(editProfileModal);
-    fillModalForm(editProfileMapping); 
-});
-
-const addLocationButton = document.querySelector(".profile__add-button");
-addLocationButton.addEventListener("click", () => {
-    handleOpenModal(addLocationModal);
-});
-
-// find all modal close buttons
-const modalCloseButtons = Array.from(document.querySelectorAll(".modal__close-button"));
-modalCloseButtons.forEach((button) => {
-    const modal = button.closest(".modal");
-    button.addEventListener("click", () => {
-        handleCloseModal(modal);
-    })
-})
-
-function handleProfileFormSubmit(evt, fieldMapping) {
-    evt.preventDefault();
-
-    fieldMapping.forEach(({inputElement, displayElement}) => {
-        displayElement.textContent = inputElement.value;
-    })
-
-    handleCloseModal(editProfileModal);
-    evt.target.reset();
-}
-
-profileFormElement.addEventListener("submit", (evt) => {
-    handleProfileFormSubmit(evt, editProfileMapping);
-});
+import {handleOpenModal, handleCloseModal} from "./utils.js";
 
 const initialCards = [
     {
@@ -115,37 +29,110 @@ const initialCards = [
         "link": "https://code.s3.yandex.net/web-code/lago.jpg"
     },
 ];
-function deleteCard(evt) {
-    evt.target.closest(".card").remove();
+
+// editProfile
+const editProfileModal = document.querySelector(".modal_type_edit-profile");
+const profileFormElement = document.forms.editProfileForm;
+const profileSaveBtn = profileFormElement.querySelector(".edit-form__save-button");
+const editProfileMapping = [
+    {
+        field: "name", 
+        inputElement: profileFormElement.elements.name,
+        displayElement: document.querySelector(".profile__name-title")
+    },
+    {
+        field: "description",
+        inputElement: profileFormElement.elements.description,
+        displayElement: document.querySelector(".profile__description")
+    }
+]
+
+// addLocation
+const addLocationModal = document.querySelector(".modal_type_add-location")
+const locationFormElement = document.forms.addLocationForm;
+const locationSaveBtn = locationFormElement.querySelector(".edit-form__save-button")
+const addLocationMapping = [
+    {
+        field: "url",
+        inputElement: locationFormElement.elements.url,
+    },
+    {
+        field: "title",
+        inputElement: locationFormElement.elements.title
+    }
+];
+
+const cardSelector = "#card-template";
+const validationConfig = {
+    inputSelector: ".edit-form__input",
+    submitButtonSelector: ".edit-form__save-button",
+    inactiveButtonClass: "edit-form__save-button_disabled",
+    inputErrorClass: "edit-form__input_type_error",
+    errorClass: "edit-form__error_visible"
+};
+
+const editProfileValidator = new FormValidator(
+    validationConfig,
+    editProfileModal
+);
+editProfileValidator.enableValidation();
+
+const addLocationValidator = new FormValidator(
+    validationConfig,
+    addLocationModal
+);
+addLocationValidator.enableValidation();
+
+function fillModalForm(fieldMapping) {
+    fieldMapping.forEach(({inputElement, displayElement}) => {
+        inputElement.value = displayElement.textContent;
+    })
 }
 
-function getCardElement(data) {
-    const cardTemplate = document.querySelector("#card-template").content;
-    const cardElement = cardTemplate.cloneNode(true);
+const editProfileButton = document.querySelector(".profile__edit-button");
+editProfileButton.addEventListener("click", () => {
+    editProfileValidator.resetValidation();
+    handleOpenModal(editProfileModal);
+    fillModalForm(editProfileMapping); 
+});
 
-    const cardImageElement = cardElement.querySelector(".card__image");
-    cardImageElement.src = data.link;
-    cardImageElement.alt = data.name;
-    cardElement.querySelector(".card__title").textContent = data.name;
+const addLocationButton = document.querySelector(".profile__add-button");
+addLocationButton.addEventListener("click", () => {
+    // reset the form
+    addLocationForm.reset();
+    addLocationValidator.resetValidation();
+    handleOpenModal(addLocationModal);
+});
 
-    cardImageElement.addEventListener("click", () => {
-        handleOpenModal(imageModal);
-        fillImageModal(data);
+// find all modal close buttons
+const modalCloseButtons = Array.from(document.querySelectorAll(".modal__close-button"));
+modalCloseButtons.forEach((button) => {
+    const modal = button.closest(".modal");
+    button.addEventListener("click", () => {
+        handleCloseModal(modal);
     })
-    const loveButton = cardElement.querySelector(".card__love-button");
-    loveButton.addEventListener("click", () => {
-        loveButton.classList.toggle("card__love-button_loved");
+})
+
+function handleProfileFormSubmit(evt, fieldMapping) {
+    evt.preventDefault();
+
+    fieldMapping.forEach(({inputElement, displayElement}) => {
+        displayElement.textContent = inputElement.value;
     })
 
-    const deleteButton = cardElement.querySelector(".card__delete-button");
-    deleteButton.addEventListener("click", deleteCard);
-
-    return cardElement;
+    handleCloseModal(editProfileModal);
+    evt.target.reset();
 }
 
-const cardListElement = document.querySelector(".locations__cards")
+profileFormElement.addEventListener("submit", (evt) => {
+    handleProfileFormSubmit(evt, editProfileMapping);
+});
+
+const cardListElement = document.querySelector(".locations__cards");
+
 initialCards.forEach((card) => {
-    cardListElement.append(getCardElement(card));
+    const newCard = new Card(card, cardSelector);
+    cardListElement.append(newCard.generateCard());
 });
 
 function handleLocationFormSubmit(evt) {
@@ -155,24 +142,9 @@ function handleLocationFormSubmit(evt) {
         link: locationFormElement.elements.url.value,
     }
     
-    cardListElement.prepend(getCardElement(data));
+    cardListElement.prepend(new Card(data, cardSelector).generateCard());
     handleCloseModal(addLocationModal);
     evt.target.reset();
 }
 
 locationFormElement.addEventListener("submit", handleLocationFormSubmit);
-
-function handleEscPress(evt) {
-    const modal = document.querySelector(".modal_opened");
-    if(modal && evt.key == "Escape") {
-        handleCloseModal(modal);
-    }
-}
-
-function handleOverlayClick(evt) {
-    const modal = document.querySelector(".modal_opened");
-    console.log(evt, modal)
-    if(modal && !evt.target.closest(".modal__opened")) {
-        handleCloseModal(modal);
-    }
-}
